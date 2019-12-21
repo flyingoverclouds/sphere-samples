@@ -1,5 +1,7 @@
 #pragma once
 
+// TODO : replace by using the .h generator :https://docs.microsoft.com/en-us/azure-sphere/hardware/hardware-abstraction
+
 // Defining alias for GPIO in MT3620 reference design board (seeed)
 
 #define LED1_RED 8
