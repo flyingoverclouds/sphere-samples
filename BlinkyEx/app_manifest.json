@@ -1,0 +1,12 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "BlinkyEx",
+  "ComponentId": "e8475335-cd55-4b73-aa70-cd05f64ddd08",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [ 9 ],
+    "AllowedApplicationConnections": []
+  },
+  "ApplicationType": "Default"
+}
