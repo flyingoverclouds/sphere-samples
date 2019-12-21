@@ -5,7 +5,7 @@
   "EntryPoint": "/bin/app",
   "CmdArgs": [],
   "Capabilities": {
-    "Gpio": [ 9 ],
+    "Gpio": [ 10 , 16, 18, 22],
     "AllowedApplicationConnections": []
   },
   "ApplicationType": "Default"
