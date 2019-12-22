@@ -69,7 +69,7 @@ int main(void)
         return -1;
     }
 
-    const struct timespec sleepTime = {1, 0};
+    const struct timespec sleepTime = {0, 300000000};
     while (true) {
         SetOnboardLedsValue(GPIO_Value_Low, GPIO_Value_Low, GPIO_Value_Low, GPIO_Value_High);
         nanosleep(&sleepTime, NULL);
