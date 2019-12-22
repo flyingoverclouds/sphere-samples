@@ -1,10 +1,15 @@
+/* Defining alias for GPIO in MT3620 reference dev board (seeed)
+ * version 1.0
+
+*/
+
 #pragma once
-/*
- *
- */
-// TODO : replace by ? using the .h generator :https://docs.microsoft.com/en-us/azure-sphere/hardware/hardware-abstraction
+
+// TODO : ??replace by using the .h generator :https://docs.microsoft.com/en-us/azure-sphere/hardware/hardware-abstraction
 
 // Defining alias for GPIO in MT3620 reference design board (seeed)
+
+
 
 #define LED1_RED		 8
 #define LED1_GREEN		 9
