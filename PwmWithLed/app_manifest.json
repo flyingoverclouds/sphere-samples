@@ -5,8 +5,11 @@
   "EntryPoint": "/bin/app",
   "CmdArgs": [],
   "Capabilities": {
-    "Gpio": [ 9 ],
-    "AllowedApplicationConnections": []
+    "Gpio" : [ 12, 13 ],
+    "AllowedConnections": [],
+    "Pwm": [ "PWM-CONTROLLER-2" ],
+    "Uart": [  ],
+    "WifiConfig": false
   },
   "ApplicationType": "Default"
 }

@@ -40,7 +40,14 @@
 
 #define PWM_CONTROLLER0 0
 #define PWM_CONTROLLER1 1
-
-// PWM2 is connected to LED1 RGB
+// PWM_CONTROLLER2 is connected to LED1 RGB
 #define PWM_CONTROLLER2 2   
 
+// PWM channel 0 of the selected PWM controller
+#define PWM_CHANNEL0    0
+// PWM channel 1 of the selected PWM controller
+#define PWM_CHANNEL1    1
+// PWM channel 2 of the selected PWM controller
+#define PWM_CHANNEL2    2
+// PWM channel 3 of the selected PWM controller
+#define PWM_CHANNEL3    3
