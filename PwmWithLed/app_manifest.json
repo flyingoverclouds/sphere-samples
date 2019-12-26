@@ -1,0 +1,15 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "PwmWithLed",
+  "ComponentId": "573d841e-6393-45a5-b406-0d1141cf87c9",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio" : [ 12, 13 ],
+    "AllowedConnections": [],
+    "Pwm": [ "PWM-CONTROLLER-2" ],
+    "Uart": [  ],
+    "WifiConfig": false
+  },
+  "ApplicationType": "Default"
+}

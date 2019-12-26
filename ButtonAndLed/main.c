@@ -8,14 +8,14 @@
 
 #include "MT3620rbd.h"
 
-struct MyGpio {
+typedef struct  {
     int led1;
     int led3;
     int buttonA;
     int buttonB;
-};
+} MyGpio;
 
-int InitGpios(struct MyGpio *gpios)
+int InitGpios( MyGpio *gpios)
 {
     gpios->led1 = GPIO_OpenAsOutput(LED1_RED, GPIO_OutputMode_PushPull, GPIO_Value_High);
     if (gpios->led1 < 0) {
@@ -68,7 +68,7 @@ int IsButtonPressed(int fdButton)
 
 int main(void)
 {
-    struct MyGpio gpios;
+     MyGpio gpios;
     InitGpios(&gpios);
 
     SetLed(gpios.led1, false);
