@@ -1,0 +1,12 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "PwmWithLed",
+  "ComponentId": "573d841e-6393-45a5-b406-0d1141cf87c9",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [ 9 ],
+    "AllowedApplicationConnections": []
+  },
+  "ApplicationType": "Default"
+}
