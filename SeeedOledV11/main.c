@@ -19,6 +19,28 @@
 #include "../MT3620_Grove_Shield_Library/Grove.h"
 #include "../MT3620_Grove_Shield_Library/Sensors/GroveOledDisplay96x96.h"
 
+// i2cScanner : list and dump i2c address of devices detected on the grove shield board
+void i2cScanner(int i2cFd)
+{
+    uint8_t i2cState;
+    const struct timespec sleepTime = { 0, 10000000 };
+    Log_Debug("Scanning I2C bus on Grove Shield ...\n");
+    for (uint8_t addr = 1; addr < 127; addr++)
+    {
+        Log_Debug("I2C[%d] : ",addr);
+
+        GroveI2C_WriteBytes(i2cFd, (uint8_t)(addr << 1), NULL, 0);
+        SC18IM700_ReadReg(i2cFd, 0x0A, &i2cState);
+        if (i2cState == I2C_OK)
+        {
+            Log_Debug("I2C_OK, address detect: 0x%02X\r\n", addr);
+        }
+        else Log_Debug(" no device detected.\n");
+
+
+        nanosleep(&sleepTime, NULL);
+    }
+}
 
 
 int main(void)
@@ -27,6 +49,14 @@ int main(void)
 
     int i2cFd;
     GroveShield_Initialize(&i2cFd, 230400);
+    if (i2cFd<0)
+    {
+        Log_Debug("ERROR : GroveShield_Initialize() return %d : %s. Please check your app manifest capabilities", errno, strerror(errno));
+        exit(-1);
+    }
+
+    i2cScanner(i2cFd);
+    exit(-1);
 
     GroveOledDisplay_Init(i2cFd, SSD1327 ); // SSD1327 is for v1.x oled (96x96). If v2 (128x128) -> use SH1107G
 
