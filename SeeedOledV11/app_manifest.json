@@ -1,0 +1,12 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "SeeedOledV11",
+  "ComponentId": "f4bbf757-aa3b-463a-ada1-4ca2bf762237",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [ 9 ],
+    "AllowedApplicationConnections": []
+  },
+  "ApplicationType": "Default"
+}
