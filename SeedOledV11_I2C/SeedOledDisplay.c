@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <errno.h>
+#include <string.h>
 
 #include <applibs/log.h>
 
@@ -29,7 +31,8 @@ int TestCompil()
 #define VERTICAL_MODE                       01
 #define HORIZONTAL_MODE                     02
 
-#define SeeedGrayOLED_Address		(0x3C << 1)
+#define SeeedGrayOLED_Address				0x3C
+//(0x3C << 1)
 
 
 /*Command and register */
@@ -175,7 +178,11 @@ static void sendCommand(uint8_t cmd)
 	uint8_t send[2];
 	send[0] = SeeedGrayOLED_Command_Mode;
 	send[1] = cmd;
-	I2CMaster_Write(_i2cFd, SeeedGrayOLED_Address, send, sizeof(send));
+	ssize_t result = I2CMaster_Write(_i2cFd, SeeedGrayOLED_Address, send, sizeof(send));
+	if (result < 0)
+	{
+		Log_Debug("I2CMaster_Write error %d : %s", errno, strerror(errno));
+	}
 }
 
 
