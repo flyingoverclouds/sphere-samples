@@ -10,6 +10,8 @@
 
 #include <applibs/log.h>
 
+#include<applibs/i2c.h>
+
 #include "seedOledDisplay.h"
 
 
@@ -55,7 +57,10 @@ int TestCompil()
 #define Scroll_128Frames        0x2
 #define Scroll_256Frames        0x3
 
-static int _i2cFd = -1;
+
+// TODO : replace global static var with local var 
+
+static int _i2cFd = -1; 
 static int Drive_IC = SH1107G;
 static char addressingMode;
 static uint8_t grayH;
@@ -164,17 +169,28 @@ const unsigned char BasicFont[][8] =
 
 static void sendCommand(uint8_t cmd)
 {
-	Log_Debug("NOT IMPLEMENTED : sendCommand()");
+	//Log_Debug("NOT IMPLEMENTED : sendCommand()");
 	//GroveI2C_WriteReg8(_i2cFd, SeeedGrayOLED_Address, SeeedGrayOLED_Command_Mode, cmd);
+
+	uint8_t send[2];
+	send[0] = SeeedGrayOLED_Command_Mode;
+	send[1] = cmd;
+	I2CMaster_Write(_i2cFd, SeeedGrayOLED_Address, send, sizeof(send));
 }
+
+
 
 static void sendData(uint8_t data)
 {
-	Log_Debug("NOT IMPLEMENTED : sendData");
+	//Log_Debug("NOT IMPLEMENTED : sendData");
 	//GroveI2C_WriteReg8(_i2cFd, SeeedGrayOLED_Address, SeeedGrayOLED_Data_Mode, data);
+	uint8_t send[2];
+	send[0] = SeeedGrayOLED_Data_Mode;
+	send[1] = data;
+	I2CMaster_Write(_i2cFd, SeeedGrayOLED_Address, send, sizeof(send));
 }
 
-void GroveOledDisplay_Init(int i2cFd, uint8_t IC)
+void SeeedOledDisplay_Init(int i2cFd, uint8_t IC)
 {
 	_i2cFd = i2cFd;
 	Drive_IC = IC;

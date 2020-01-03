@@ -21,16 +21,37 @@ int main(void)
    
     Log_Debug("\nSeedOledV11_I2C : drive oled i2c display with native i2c port 3\n");
 
-    int i2cFD = openI2Cport(MT3620_ISU3_I2C);
-
-    if (i2cFD < 0)
+    int i2cFd = I2CMaster_Open(MT3620_ISU3_I2C);
+    if (i2cFd < 0)
     {
-        Log_Debug("ERROR : unable to open I2C port 3.");
-        return (-1);
+        Log_Debug("ERROR: I2CMaster_Open: errno=%d (%s)\n", errno, strerror(errno));
+        return -1;
     }
 
+
+    int result = I2CMaster_SetBusSpeed(i2cFd, I2C_BUS_SPEED_STANDARD);
+    if (result != 0) {
+        Log_Debug("ERROR: I2CMaster_SetBusSpeed: errno=%d (%s)\n", errno, strerror(errno));
+        return -1;
+    }
+
+    result = I2CMaster_SetTimeout(i2cFd, 100);
+    if (result != 0) {
+        Log_Debug("ERROR: I2CMaster_SetTimeout: errno=%d (%s)\n", errno, strerror(errno));
+        return -1;
+    }
+
+   /* result = I2CMaster_SetDefaultTargetAddress(i2cFd, lsm6ds3Address);
+    if (result != 0) {
+        Log_Debug("ERROR: I2CMaster_SetDefaultTargetAddress: errno=%d (%s)\n", errno,
+            strerror(errno));
+        return -1;
+    }*/
+
+    SeeedOledDisplay_Init(i2cFd, SSD1327); // initialize the oled display as a SSD1327 chip driven by
+
+
     unsigned int counter = 0;
-   
     const struct timespec sleepTime = {1, 0};
     while (true) {
         Log_Debug("Counter = %d", counter);

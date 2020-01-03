@@ -12,7 +12,7 @@ int TestCompil(void);
 #define SH1107G  1
 #define SSD1327  2
 
-void GroveOledDisplay_Init(int i2cFd, uint8_t IC);
+void SeeedOledDisplay_Init(int i2cFd, uint8_t IC);
 
 void setNormalDisplay(void);
 void setInverseDisplay(void);
