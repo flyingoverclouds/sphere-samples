@@ -50,6 +50,18 @@ int main(void)
 
     SeeedOledDisplay_Init(i2cFd, SSD1327); // initialize the oled display as a SSD1327 chip driven by
 
+   // Word display
+    clearDisplay();
+    setNormalDisplay();
+    setVerticalMode();
+
+    for (uint8_t i = 0; i < 16; i++)
+    {
+        setTextXY(i, 0);  //set Cursor to ith line, 0th column
+        setGrayLevel(i); //Set Grayscale level. Any number between 0 - 15.
+        putString("Hello World"); //Print Hello World
+    }
+
 
     unsigned int counter = 0;
     const struct timespec sleepTime = {1, 0};

@@ -17,11 +17,6 @@
 #include "seedOledDisplay.h"
 
 
-int TestCompil()
-{
-	return 1234;
-}
-
 
 
 

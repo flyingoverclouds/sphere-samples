@@ -5,10 +5,6 @@
 #include "applibs_versions.h"
 #include <applibs/gpio.h>
 
-
-int TestCompil(void);
-
-
 #define SH1107G  1
 #define SSD1327  2
 
