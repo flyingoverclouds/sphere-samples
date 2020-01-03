@@ -23,3 +23,10 @@
 /// It indicates which version of the SPI data structures the application uses.
 /// </summary>
 #define SPI_STRUCTS_VERSION 1
+
+
+/// <summary>
+/// This identifier must be defined before including any of the I2C-related header files.
+/// It indicates which version of the I2C data structures the application uses.
+/// </summary>
+#define I2C_STRUCTS_VERSION 1

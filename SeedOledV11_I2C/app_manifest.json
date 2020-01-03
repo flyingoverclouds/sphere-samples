@@ -5,8 +5,9 @@
   "EntryPoint": "/bin/app",
   "CmdArgs": [],
   "Capabilities": {
-    "Gpio": [  ],
-    "AllowedApplicationConnections": []
+    "Gpio": [],
+    "AllowedApplicationConnections": [],
+    "I2cMaster": [ "ISU3" ]
   },
   "ApplicationType": "Default"
 }
