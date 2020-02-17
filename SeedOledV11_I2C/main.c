@@ -52,21 +52,28 @@ int main(void)
 
    // Word display
     clearDisplay();
-    setNormalDisplay();
-    setVerticalMode();
+    /*setNormalDisplay();
+    setVerticalMode();*/
+
 
     for (uint8_t i = 0; i < 16; i++)
     {
-        setTextXY(i, 0);  //set Cursor to ith line, 0th column
-        setGrayLevel(i); //Set Grayscale level. Any number between 0 - 15.
+        setTextXY(i, i);  //set Cursor to ith line, 0th column
+        //setGrayLevel(i); //Set Grayscale level. Any number between 0 - 15.
         putString("Hello World"); //Print Hello World
     }
 
 
     unsigned int counter = 0;
     const struct timespec sleepTime = {1, 0};
-    while (true) {
-        Log_Debug("Counter = %d", counter);
+    while (1) {
+        Log_Debug("Counter = %d\n", counter);
+        setTextXY(1, 1);
+        if (counter % 2 == 0)
+            putString("AAAA       ");
+        else
+            putString("OOOO0000000");
+        putNumber(counter);
         nanosleep(&sleepTime, NULL);
         counter++;
     }
