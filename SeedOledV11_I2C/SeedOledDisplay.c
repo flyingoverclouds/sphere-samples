@@ -190,6 +190,7 @@ static void sendData(uint8_t data)
 	}
 }
 
+
 void SeeedOledDisplay_Init(int i2cFd, uint8_t IC)
 {
 	_i2cFd = i2cFd;
@@ -201,7 +202,7 @@ void SeeedOledDisplay_Init(int i2cFd, uint8_t IC)
 	{
 		sendCommand(0xFD); // Unlock OLED driver IC MCU interface from entering command. i.e: Accept commands
 		sendCommand(0x12);
-//		sendCommand(0xAE); // Set display off
+		sendCommand(0xAE); // Set display off
 		sendCommand(0xA8); // set multiplex ratio
 		sendCommand(0x5F); // 96
 		sendCommand(0xA1); // set display start line
@@ -210,27 +211,23 @@ void SeeedOledDisplay_Init(int i2cFd, uint8_t IC)
 		sendCommand(0x60);
 		sendCommand(0xA0); // set remap
 		sendCommand(0x46);
-
-		//sendCommand(0xAB); // set vdd internal
-		//sendCommand(0x01); //
-
+		sendCommand(0xAB); // set vdd internal
+		sendCommand(0x01); //
 		sendCommand(0x81); // set contrasr
 		sendCommand(0x53); // 100 nit
-
-		//sendCommand(0xB1); // Set Phase Length
-		//sendCommand(0X51); //
-		//sendCommand(0xB3); // Set Display Clock Divide Ratio/Oscillator Frequency
-		//sendCommand(0x01);
-		//sendCommand(0xB9); //
-		//sendCommand(0xBC); // set pre_charge voltage/VCOMH
-		//sendCommand(0x08); // (0x08);
-		//sendCommand(0xBE); // set VCOMH
-		//sendCommand(0X07); // (0x07);
-		//sendCommand(0xB6); // Set second pre-charge period
-		//sendCommand(0x01); //
-		//sendCommand(0xD5); // enable second precharge and enternal vsl
-		//sendCommand(0X62); // (0x62);
-
+		sendCommand(0xB1); // Set Phase Length
+		sendCommand(0X51); //
+		sendCommand(0xB3); // Set Display Clock Divide Ratio/Oscillator Frequency
+		sendCommand(0x01);
+		sendCommand(0xB9); //
+		sendCommand(0xBC); // set pre_charge voltage/VCOMH
+		sendCommand(0x08); // (0x08);
+		sendCommand(0xBE); // set VCOMH
+		sendCommand(0X07); // (0x07);
+		sendCommand(0xB6); // Set second pre-charge period
+		sendCommand(0x01); //
+		sendCommand(0xD5); // enable second precharge and enternal vsl
+		sendCommand(0X62); // (0x62);
 		sendCommand(0xA4); // Set Normal Display Mode
 		sendCommand(0x2E); // Deactivate Scroll
 		sendCommand(0xAF); // Switch on display

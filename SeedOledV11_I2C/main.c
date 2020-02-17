@@ -1,4 +1,13 @@
-﻿#include <stdbool.h>
+﻿/***************************************************************************
+ * This program is a counter that display counter value on OLED Screen     *
+ * Oled screen is direct connected to I2C port on the RefDev board         *
+ *                                                                         *
+ *  /!\ : some SEED oled scren are badly identified as v1 (SSD1327) but    *
+ *      in reality are v2 (SSH1107G) like mine !                           *
+ ***************************************************************************/
+
+
+#include <stdbool.h>
 #include <errno.h>
 #include <string.h>
 #include <time.h>
@@ -9,12 +18,9 @@
 
 #include "seedOledDisplay.h"
 
+// We use ISU 3 as I2C bus RTS3, RXD3, 3.3V on H3.3 GND on H3.2
 #define MT3620_ISU3_I2C (3)
 
-int openI2Cport(int i2cID)
-{
-    return -1; // to test
-}
 
 int main(void)
 {
@@ -41,39 +47,23 @@ int main(void)
         return -1;
     }
 
-   /* result = I2CMaster_SetDefaultTargetAddress(i2cFd, lsm6ds3Address);
-    if (result != 0) {
-        Log_Debug("ERROR: I2CMaster_SetDefaultTargetAddress: errno=%d (%s)\n", errno,
-            strerror(errno));
-        return -1;
-    }*/
+    // !\ : some SEED oled scren are badly identified as v1(SSD1327) but in reality are pre v2(SSH1107G) like mine with v1.1 sticker !
 
-    SeeedOledDisplay_Init(i2cFd, SSD1327); // initialize the oled display as a SSD1327 chip driven by
+    SeeedOledDisplay_Init(i2cFd, SH1107G); // initialize the oled display as driven by a SH1107G 
 
    // Word display
     clearDisplay();
-    /*setNormalDisplay();
-    setVerticalMode();*/
-
-
-    for (uint8_t i = 0; i < 16; i++)
-    {
-        setTextXY(i, i);  //set Cursor to ith line, 0th column
-        //setGrayLevel(i); //Set Grayscale level. Any number between 0 - 15.
-        putString("Hello World"); //Print Hello World
-    }
-
+    setNormalDisplay();
+    setVerticalMode();
 
     unsigned int counter = 0;
     const struct timespec sleepTime = {1, 0};
     while (1) {
         Log_Debug("Counter = %d\n", counter);
-        setTextXY(1, 1);
-        if (counter % 2 == 0)
-            putString("AAAA       ");
-        else
-            putString("OOOO0000000");
+        setTextXY(2,2);
+        putString("Counter= ");
         putNumber(counter);
+        putString("    ");
         nanosleep(&sleepTime, NULL);
         counter++;
     }
