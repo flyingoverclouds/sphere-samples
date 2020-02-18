@@ -1,0 +1,13 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "SeedOledV11_I2C",
+  "ComponentId": "56c8d2b2-8848-48cf-aeed-b101a05a7d14",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [],
+    "AllowedApplicationConnections": [],
+    "I2cMaster": [ "ISU3" ]
+  },
+  "ApplicationType": "Default"
+}

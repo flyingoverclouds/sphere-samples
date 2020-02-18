@@ -348,3 +348,4 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/MT3620_Grove_Shield_Library/out/ARM-Debug-3
