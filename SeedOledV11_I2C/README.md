@@ -28,7 +28,7 @@ Counter value is printed at the top of Screen.
 I2C code :
 * I2C initialisation in _main.c_
 
-* write i2c data in _SeedOledDiplay.c_
+* write i2c data in _SeedOledDisplay.c_
 ```C
 static void sendData(uint8_t data) { /* ... */ }
 static void sendCommand(uint8_t cmd) { /* ... */ }
