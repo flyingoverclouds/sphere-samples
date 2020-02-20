@@ -34,8 +34,12 @@ int main(void)
         return -1;
     }
 
-
-    int result = I2CMaster_SetBusSpeed(i2cFd, I2C_BUS_SPEED_STANDARD);
+    /* I2C supported speed on MT3620 : 
+     * STANDARD, FAST : OK
+     * FAST_PLUS : unstable (many ressource "resource busy" error) -> TODO : try to retry command/adjust timeout
+     * HIGH : not supported
+     */
+    int result = I2CMaster_SetBusSpeed(i2cFd, I2C_BUS_SPEED_FAST);
     if (result != 0) {
         Log_Debug("ERROR: I2CMaster_SetBusSpeed: errno=%d (%s)\n", errno, strerror(errno));
         return -1;
@@ -54,16 +58,22 @@ int main(void)
    // Word display
     clearDisplay();
     setNormalDisplay();
+    //setInverseDisplay();
     setVerticalMode();
 
-    unsigned int counter = 0;
+    long counter = 0;
     const struct timespec sleepTime = {1, 0};
     while (1) {
         Log_Debug("Counter = %d\n", counter);
-        setTextXY(2,2);
+        
+        setDoubleSizeText(0);
+        setTextXY(0,0);
         putString("Counter= ");
+
+        setDoubleSizeText(1);
+        setTextXY(5, 0);
         putNumber(counter);
-        putString("    ");
+        putString(" ");
         nanosleep(&sleepTime, NULL);
         counter++;
     }

@@ -1,5 +1,5 @@
 /* BASIC Library to drive the Seed oled display https://www.seeedstudio.com/Grove-OLED-Display-1-12.html */
-/* based on Seed Sphere Grove Library, adapted to used onboard I2C bus */
+/* based on Seed Sphere Grove Library, adapted to used onboard RDB MT3620 I2C bus */
 
 
 #include <unistd.h>
@@ -62,6 +62,8 @@ static int Drive_IC = SH1107G;
 static char addressingMode;
 static uint8_t grayH;
 static uint8_t grayL;
+
+static bool _textDoubleSize = false;
 
 // This font can be freely used without any restriction(It is placed in public domain)
 const unsigned char BasicFont[][8] =
@@ -303,6 +305,13 @@ void setHorizontalMode(void)
 	}
 }
 
+
+void setDoubleSizeText(bool dblSize)
+{
+	_textDoubleSize= dblSize;
+}
+
+
 void setVerticalMode(void)
 {
 	if (Drive_IC == SSD1327)
@@ -380,6 +389,11 @@ void putChar(unsigned char C)
 
 	if (Drive_IC == SSD1327)
 	{
+		if (_textDoubleSize)
+		{
+			Log_Debug("ERROR: double size NOT SUPPORTED on SSD1327");
+		}
+
 		for (int i = 0; i < 8; i = i + 2)
 		{
 			for (int j = 0; j < 8; j++)
@@ -398,10 +412,27 @@ void putChar(unsigned char C)
 	}
 	else if (Drive_IC == SH1107G)
 	{
-		for (int i = 0; i < 8; i++)
+		if (!_textDoubleSize)
 		{
-			//read bytes from code memory
-			sendData((BasicFont[C - 32][i])); //font array starts at 0, ASCII starts at 32. Hence the translation
+			for (int i = 0; i < 8; i++)
+			{
+				//read bytes from code memory
+				sendData((BasicFont[C - 32][i])); //font array starts at 0, ASCII starts at 32. Hence the translation
+			}
+		}
+		else
+		{
+			// TODO : add support for 2dbl size char
+
+			// FONT contains vertical bitmap slice
+
+			for (int i = 0; i < 8; i++)
+			{
+				//read bytes from code memory
+				sendData((BasicFont[C - 32][i])); //font array starts at 0, ASCII starts at 32. Hence the translation
+				sendData((BasicFont[C - 32][i])); //font array starts at 0, ASCII starts at 32. Hence the translation
+			}
+
 		}
 	}
 }

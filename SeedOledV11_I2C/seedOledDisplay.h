@@ -8,6 +8,9 @@
 #define SH1107G  1
 #define SSD1327  2
 
+
+
+
 void SeeedOledDisplay_Init(int i2cFd, uint8_t IC);
 
 void setNormalDisplay(void);
@@ -24,6 +27,7 @@ void setContrastLevel(unsigned char ContrastLevel);
 void putChar(unsigned char c);
 void putString(const char* String);
 unsigned char putNumber(long n);
+void setDoubleSizeText(bool dblSize);
 
 void drawBitmap(const unsigned char* bitmaparray, int bytes);
 
