@@ -1,0 +1,13 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "MT3620_OLED_MenuDemo",
+  "ComponentId": "baaf7715-a005-45ec-8c0d-1d247b89ef1b",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [ 12 , 13 ],
+    "AllowedApplicationConnections": [],
+    "I2cMaster": [ "ISU3" ]
+  },
+  "ApplicationType": "Default"
+}
