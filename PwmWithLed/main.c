@@ -91,7 +91,7 @@ int main(void)
 {
     MyIOs myIOs;
     InitGpios(&myIOs);
-    SetAllPwmValue(&myIOs, 0);
+    SetAllPwmValue(&myIOs, 1000);
     SetPwmChannelState(myIOs.pwm2, PWM_CHANNEL3, &ledPwmState); // PWM2/Channel3 is set to zero (connected to wifi led Blue)
 
     const struct timespec sleepTime = { 0, 100000000 }; // sleeptime = 100 ms
@@ -103,7 +103,7 @@ int main(void)
                 dutyCycleNs -= stepIncrementNs;
             else
                 dutyCycleNs = 0;
-            Log_Debug("DEC to : %d", dutyCycleNs);
+            Log_Debug("DEC to : %d\n", dutyCycleNs);
             SetAllPwmValue(&myIOs, dutyCycleNs);
         }
 
@@ -112,7 +112,7 @@ int main(void)
             dutyCycleNs += stepIncrementNs;
             if (dutyCycleNs > fullCycleNs)
                 dutyCycleNs = fullCycleNs;
-            Log_Debug("INC to : %d", dutyCycleNs);
+            Log_Debug("INC to : %d\n", dutyCycleNs);
             SetAllPwmValue(&myIOs, dutyCycleNs);
         }
         nanosleep(&sleepTime, NULL);
